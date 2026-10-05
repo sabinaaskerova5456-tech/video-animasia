@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ky">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070a12" />
+    <meta
+      name="description"
+      content="Кол жаңсоолоруңуз менен башкарылган жандуу 3D бөлүкчөлөр дүйнөсү."
+    />
+    <title>NEBULA — жаңсоолор менен башкарылуучу 3D дүйнө</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="NEBULA башкы бет">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>NEBULA<span class="brand-dot">.</span></span>
+        </a>
+        <div class="topbar-note"><span class="live-indicator"></span> ЖАНДУУ 3D ТАЖРЫЙБА</div>
+        <button class="icon-button sound-button" id="soundToggle" type="button" aria-pressed="true" aria-label="Үндү өчүрүү">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Zm4 4a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/></svg>
+          <span>ҮН</span>
+        </button>
+      </header>
+
+      <section class="intro">
+        <div class="intro-copy">
+          <div class="eyebrow"><span>01</span> КОЛУҢ МЕНЕН БАШКАРА</div>
+          <h1>Кыймылда.<br /><span>Ааламды</span> өзгөрт.</h1>
+          <p>Кол жаңсооңду көрсөт — бөлүкчөлөр сенин кыймылыңа жооп берет.</p>
+        </div>
+        <div class="intro-aside"><span class="aside-line"></span><span>КАМЕРАҢДЫ КҮЙГҮЗ<br />ЖАНА СЫНАП КӨР</span></div>
+      </section>
+
+      <section class="studio" aria-label="3D бөлүкчөлөр студиясы">
+        <div class="scene-panel" id="scenePanel">
+          <div class="scene-grid" aria-hidden="true"></div>
+          <div class="scene-topline">
+            <div class="scene-state"><span class="state-dot" id="stateDot"></span><span id="sceneStatus">КАМЕРА КҮТҮЛҮҮДӨ</span></div>
+            <div class="scene-index">NEBULA <span>/</span> 001</div>
+          </div>
+          <canvas id="sceneCanvas" aria-label="Жаңсоого жооп берген 3D бөлүкчөлөр"></canvas>
+          <div class="scene-center-label" id="sceneCenterLabel">
+            <div class="center-orbit"><span></span><span></span><span></span></div>
+            <p>СЕН КЫЙМЫЛДА,<br /><strong>БӨЛҮКЧӨЛӨР ОЙГОНСУН</strong></p>
+          </div>
+          <div class="scene-caption">
+            <span><span class="caption-star">✳</span> <span id="effectName">ГАЛАКТИКА</span></span>
+            <span class="mono" id="particleCount">3 200 БӨЛҮКЧӨ</span>
+          </div>
+          <div class="scene-tools">
+            <button class="tool-button" id="screenshotButton" type="button" title="PNG сүрөт сактоо" aria-label="PNG сүрөт сактоо">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l1.4-2h7.2L17 7h3v12H4zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>
+              <span>СҮРӨТ</span>
+            </button>
+            <button class="tool-button record-button" id="recordButton" type="button" title="Видео жазууну баштоо">
+              <span class="record-icon"></span><span id="recordLabel">ЖАЗУУ</span>
+            </button>
+          </div>
+          <div class="recording-badge" id="recordingBadge"><span></span> ЖАЗЫЛУУДА</div>
+          <div class="scene-loading" id="sceneLoading"><span class="loading-spinner"></span><span>3D ДҮЙНӨ ЖҮКТӨЛҮҮДӨ</span></div>
+        </div>
+
+        <aside class="control-panel">
+          <div class="panel-heading">
+            <div><div class="eyebrow"><span>02</span> БАШКАРУУ</div><h2>Студия</h2></div>
+            <span class="connection-pill" id="connectionPill"><i></i> OFFLINE</span>
+          </div>
+
+          <div class="camera-card">
+            <div class="camera-preview" id="cameraPreview">
+              <video id="webcam" autoplay playsinline muted></video>
+              <canvas id="landmarkCanvas"></canvas>
+              <div class="camera-placeholder" id="cameraPlaceholder"><span class="camera-symbol">◉</span><span>КАМЕРА ӨЧҮК</span></div>
+              <div class="camera-corner corner-tl"></div><div class="camera-corner corner-tr"></div>
+              <div class="camera-corner corner-bl"></div><div class="camera-corner corner-br"></div>
+              <div class="camera-label"><span class="live-indicator"></span> LIVE INPUT</div>
+            </div>
+            <button class="camera-button" id="cameraButton" type="button">
+              <span class="camera-button-icon">↗</span><span id="cameraButtonLabel">КАМЕРАНЫ ИШТЕТҮҮ</span>
+            </button>
+            <p class="camera-hint" id="cameraHint">Камерага уруксат бер. Жакшы жарыкта алаканыңды көрсөт.</p>
+          </div>
+
+          <div class="gesture-section">
+            <div class="section-label"><span>ЖАҢСООЛОР</span><span class="mono">01 — 06</span></div>
+            <div class="gesture-list">
+              <div class="gesture-row active" data-gesture="open"><span class="gesture-emoji">✋</span><span class="gesture-title">Ачык алакан</span><span class="gesture-effect">ГАЛАКТИКА</span></div>
+              <div class="gesture-row" data-gesture="heart"><span class="gesture-emoji">🫰</span><span class="gesture-title">Finger heart</span><span class="gesture-effect">ЖҮРӨК</span></div>
+              <div class="gesture-row" data-gesture="peace"><span class="gesture-emoji">✌️</span><span class="gesture-title">Peace / V</span><span class="gesture-effect">3D ТЕКСТ</span></div>
+              <div class="gesture-row" data-gesture="point"><span class="gesture-emoji">☝️</span><span class="gesture-title">Бир манжа</span><span class="gesture-effect">ПЛАНЕТА</span></div>
+              <div class="gesture-row" data-gesture="fist"><span class="gesture-emoji">✊</span><span class="gesture-title">Жумдурулган кол</span><span class="gesture-effect">КАРА ТУҢГУЮК</span></div>
+              <div class="gesture-row" data-gesture="magic"><span class="gesture-emoji">✨</span><span class="gesture-title">Сыйкыр / Shh</span><span class="gesture-effect">ФЕЙЕРВЕРК</span></div>
+            </div>
+          </div>
+
+          <div class="theme-section">
+            <div class="section-label"><span>ТҮСТҮ ТАНДА</span><span class="mono">THEME</span></div>
+            <div class="theme-switcher" role="group" aria-label="Түс темасы">
+              <button class="theme-button selected" data-theme="cyber" type="button"><i class="theme-dot cyber-dot"></i>CYBER</button>
+              <button class="theme-button" data-theme="gold" type="button"><i class="theme-dot gold-dot"></i>GOLD</button>
+              <button class="theme-button" data-theme="sci-fi" type="button"><i class="theme-dot scifi-dot"></i>SCI-FI</button>
+            </div>
+          </div>
+
+          <div class="panel-footer">
+            <button class="mode-toggle" id="forceToggle" type="button" aria-pressed="false"><span class="toggle-track"><i></i></span><span>МАНЖАДАН ТҮРТҮҮ</span></button>
+            <span class="footer-status" id="trackingStatus">КАМЕРА КҮТҮЛҮҮДӨ</span>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="page-footer">
+        <span>КЫЙМЫЛ — ЖАҢЫ ААЛАМ</span>
+        <span>THREE.JS <i>×</i> MEDIAPIPE</span>
+        <span class="footer-version">NEBULA EXPERIENCE <span>© 2026</span></span>
+      </footer>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
